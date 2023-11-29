@@ -2,6 +2,7 @@ package date
 
 import (
 	"strings"
+	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -57,7 +58,28 @@ func (p *picker) formatDate() string {
 	raw := p.Date.Format("02 Jan 2006")
 	parts := strings.Split(raw, " ")
 	parts[int(p.focus)] = p.cursorTextStyle.Render(parts[int(p.focus)])
-	return strings.Join(parts, " ")
+	return strings.Join(parts, " ") + " " + p.formatWeekday()
+}
+
+func (p *picker) formatWeekday() string {
+	name := ""
+	switch p.Date.Weekday() {
+	case time.Monday:
+		name = "Mon"
+	case time.Tuesday:
+		name = "Tue"
+	case time.Wednesday:
+		name = "Wed"
+	case time.Thursday:
+		name = "Thu"
+	case time.Friday:
+		name = "Fri"
+	case time.Saturday:
+		name = "Sat"
+	case time.Sunday:
+		name = "Sun"
+	}
+	return lipgloss.NewStyle().Faint(true).Render(name)
 }
 
 func (p *picker) incr(d direction) {

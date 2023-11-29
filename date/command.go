@@ -7,6 +7,7 @@ import (
 	// "github.com/charmbracelet/bubbles/textinput"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/fxtlabs/date"
 
 	// "github.com/charmbracelet/gum/cursor"
 	"github.com/charmbracelet/gum/internal/exit"
@@ -16,9 +17,14 @@ import (
 // https://github.com/charmbracelet/bubbles/textinput
 func (o Options) Run() error {
 	picker := Default()
+
 	picker.prompt = o.Prompt
 	picker.promptStyle = o.PromptStyle.ToLipgloss()
 	picker.cursorTextStyle = o.CursorTextStyle.ToLipgloss()
+
+	if initial, err := date.ParseISO(o.Value); err == nil {
+		picker.Date = initial
+	}
 
 	p := tea.NewProgram(model{
 		picker:      picker,
