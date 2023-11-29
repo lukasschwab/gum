@@ -120,8 +120,6 @@ func (p *picker) Update(msg tea.Msg) (*picker, tea.Cmd) {
 		case "right", "l":
 			p.focus = p.focus.incr(forward)
 		}
-
-		// TODO: add support for typing digits
 	}
 	return p, nil
 }

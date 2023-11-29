@@ -1,11 +1,9 @@
-// FIXME: replace this docstring.
-// Package input provides a shell script interface for the text input bubble.
-// https://github.com/charmbracelet/bubbles/tree/master/textinput
+// Package date provides a shell script interface for picking a date.
 //
-// It can be used to prompt the user for some input. The text the user entered
-// will be sent to stdout.
+// The date the user selected will be sent to stdout in ISO-8601 format:
+// YYYY-MM-DD.
 //
-// $ gum input --placeholder "What's your favorite gum?" > answer.text
+// $ gum date --value 2023-11-28 > date.text
 package date
 
 import (

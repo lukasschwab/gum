@@ -401,7 +401,17 @@ See [`charmbracelet/log`](https://github.com/charmbracelet/log) for more usage.
 
 ## Date
 
-<!-- TODO: add documentation here -->
+Pick a date, starting from the current date by default:
+
+```bash
+gum date
+```
+
+Or starting from an initial date of your choosing:
+
+```bash
+gum date --value 2023-11-28
+```
 
 ## Examples
 
