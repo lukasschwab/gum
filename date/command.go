@@ -4,13 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	// "github.com/charmbracelet/bubbles/textinput"
-
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/fxtlabs/date"
-
-	// "github.com/charmbracelet/gum/cursor"
 	"github.com/charmbracelet/gum/internal/exit"
+
+	"github.com/fxtlabs/date"
 )
 
 // Run provides a shell script interface for the text input bubble.
@@ -21,11 +18,9 @@ func (o Options) Run() error {
 	picker.prompt = o.Prompt
 	picker.promptStyle = o.PromptStyle.ToLipgloss()
 	picker.cursorTextStyle = o.CursorTextStyle.ToLipgloss()
-
-	if initial, err := date.ParseISO(o.Value); err == nil {
-		picker.Date = initial
+	if value, err := date.ParseISO(o.Value); err == nil {
+		picker.Date = value
 	}
-
 	p := tea.NewProgram(model{
 		picker:      picker,
 		aborted:     false,

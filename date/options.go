@@ -8,6 +8,7 @@ import (
 
 // Options are the customization options for the date.
 // TODO: make output format configurable.
+// TODO: allow specifying an offset for the initial date in days.
 type Options struct {
 	Prompt          string        `help:"Prompt to display" default:"> " env:"GUM_DATE_PROMPT"`
 	PromptStyle     style.Styles  `embed:"" prefix:"prompt." envprefix:"GUM_DATE_PROMPT_"`

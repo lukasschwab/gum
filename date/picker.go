@@ -11,6 +11,12 @@ import (
 
 type interval int
 
+// Default styles.
+var (
+	weekdayStyle           = lipgloss.NewStyle().Faint(true)
+	defaultCursorTextStyle = lipgloss.NewStyle().Underline(true).Foreground(lipgloss.Color("201"))
+)
+
 const (
 	day   interval = 0
 	month interval = 1
@@ -46,11 +52,10 @@ type picker struct {
 
 func Default() *picker {
 	return &picker{
-		Date:   date.Today(),
-		focus:  day,
-		prompt: "> ",
-		// TODO: reconsider these styles; look at reference.
-		cursorTextStyle: lipgloss.NewStyle().Underline(true).Foreground(lipgloss.Color("201")),
+		Date:            date.Today(),
+		focus:           day,
+		prompt:          "> ",
+		cursorTextStyle: defaultCursorTextStyle,
 	}
 }
 
@@ -79,7 +84,7 @@ func (p *picker) formatWeekday() string {
 	case time.Sunday:
 		name = "Sun"
 	}
-	return lipgloss.NewStyle().Faint(true).Render(name)
+	return weekdayStyle.Render(name)
 }
 
 func (p *picker) incr(d direction) {
