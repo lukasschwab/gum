@@ -11,17 +11,15 @@ package date
 import (
 	"time"
 
-	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/gum/timeout"
 	"github.com/charmbracelet/lipgloss"
 )
 
 type model struct {
-	autoWidth   bool
 	header      string
 	headerStyle lipgloss.Style
-	textinput   textinput.Model
+	picker      *picker
 	quitting    bool
 	aborted     bool
 	timeout     time.Duration
@@ -30,20 +28,20 @@ type model struct {
 
 func (m model) Init() tea.Cmd {
 	return tea.Batch(
-		textinput.Blink,
 		timeout.Init(m.timeout, nil),
 	)
 }
+
 func (m model) View() string {
 	if m.quitting {
 		return ""
 	}
 	if m.header != "" {
 		header := m.headerStyle.Render(m.header)
-		return lipgloss.JoinVertical(lipgloss.Left, header, m.textinput.View())
+		return lipgloss.JoinVertical(lipgloss.Left, header, m.picker.View())
 	}
 
-	return m.textinput.View()
+	return m.picker.View()
 }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -56,10 +54,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		m.timeout = msg.TimeoutValue
 		return m, timeout.Tick(msg.TimeoutValue, msg.Data)
-	case tea.WindowSizeMsg:
-		if m.autoWidth {
-			m.textinput.Width = msg.Width - lipgloss.Width(m.textinput.Prompt) - 1
-		}
+	// case tea.WindowSizeMsg:
+	// 	if m.autoWidth {
+	// 		m.textinput.Width = msg.Width - lipgloss.Width(m.textinput.Prompt) - 1
+	// 	}
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "esc":
@@ -73,6 +71,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	var cmd tea.Cmd
-	m.textinput, cmd = m.textinput.Update(msg)
+	m.picker, cmd = m.picker.Update(msg)
 	return m, cmd
 }
