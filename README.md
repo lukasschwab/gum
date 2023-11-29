@@ -413,6 +413,10 @@ Or starting from an initial date of your choosing:
 gum date --value 2023-11-28
 ```
 
+![Demo of ](https://vhs.charm.sh/vhs-2Gkiemx0ALZZBmODcSrg2I.gif)
+
+<img src="https://vhs.charm.sh/vhs-2Gkiemx0ALZZBmODcSrg2I.gif" width="600" alt="Running gum date with a prompt specified" />
+
 ## Examples
 
 See the [examples](./examples/) directory for more real world use cases.
