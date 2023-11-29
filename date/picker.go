@@ -25,11 +25,11 @@ const (
 
 // incr i in direction d; bodge mod-3 indexing.
 func (i interval) incr(d direction) interval {
-	if mod := (int(i) + int(d)) % 3; mod < 0 {
+	mod := (int(i) + int(d)) % 3
+	if mod < 0 {
 		return year
-	} else {
-		return interval(mod)
 	}
+	return interval(mod)
 }
 
 type direction int
@@ -50,7 +50,7 @@ type picker struct {
 	cursorTextStyle lipgloss.Style
 }
 
-func Default() *picker {
+func basePicker() *picker {
 	return &picker{
 		Date:            date.Today(),
 		focus:           day,

@@ -13,7 +13,7 @@ import (
 // Run provides a shell script interface for the text input bubble.
 // https://github.com/charmbracelet/bubbles/textinput
 func (o Options) Run() error {
-	picker := Default()
+	picker := basePicker()
 
 	picker.prompt = o.Prompt
 	picker.promptStyle = o.PromptStyle.ToLipgloss()
