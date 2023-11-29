@@ -59,7 +59,15 @@ type Gum struct {
 	//
 	Confirm confirm.Options `cmd:"" help:"Ask a user to confirm an action"`
 
-	// FIXME: add docstring here.
+	// Date provides an interface for picking a date. Outputs the selected date
+	// in ISO 8601 format: `YYYY-MM-DD`.
+	//
+	// $ gum date
+	//
+	// You can specify a start date in ISO 8601 format. Let's pick a date
+	// starting with the initial value Nov. 28, 2023:
+	//
+	// $ gum date --value="2023-11-28"
 	Date date.Options `cmd:"" help:"Pick a date"`
 
 	// File provides an interface to pick a file from a folder (tree).
